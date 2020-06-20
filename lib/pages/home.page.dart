@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:scrapbook/pages/image_view.page.dart';
 import 'package:typeweight/typeweight.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -53,7 +54,22 @@ class HomePage extends StatelessWidget {
                     NavigationToolbar.kMiddleSpacing * 2;
 
                 return InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    if (thumbnail != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          fullscreenDialog: true,
+                          builder: (_) {
+                            return ImageViewPage(
+                              photo: thumbnail.url,
+                              id: index,
+                            );
+                          },
+                        ),
+                      );
+                    }
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                       border: Border(
@@ -91,8 +107,9 @@ class HomePage extends StatelessWidget {
                                 height: 40,
                                 width: 40,
                                 child: FadeInImage(
-                                  placeholder:
-                                      AssetImage('assets/placeholder.png'),
+                                  placeholder: AssetImage(
+                                    'assets/placeholder.png',
+                                  ),
                                   image: NetworkImage(
                                     post.user.avatar,
                                   ),
@@ -148,21 +165,24 @@ class HomePage extends StatelessWidget {
                                   color: Colors.grey[300],
                                 ),
                                 padding: const EdgeInsets.all(1),
-                                child: Container(
-                                  clipBehavior: Clip.antiAlias,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  width: thumbnailWidth,
-                                  height: thumbnailWidth * (9 / 16),
-                                  child: FadeInImage(
-                                    placeholder: AssetImage(
-                                      'assets/placeholder.png',
+                                child: Hero(
+                                  tag: '${thumbnail.url}-$index',
+                                  child: Container(
+                                    clipBehavior: Clip.antiAlias,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
                                     ),
-                                    image: NetworkImage(
-                                      thumbnail.thumbnails.full.url,
+                                    width: thumbnailWidth,
+                                    height: thumbnailWidth * (9 / 16),
+                                    child: FadeInImage(
+                                      placeholder: AssetImage(
+                                        'assets/placeholder.png',
+                                      ),
+                                      image: NetworkImage(
+                                        thumbnail.thumbnails.full.url,
+                                      ),
+                                      fit: BoxFit.cover,
                                     ),
-                                    fit: BoxFit.cover,
                                   ),
                                 ),
                               )
