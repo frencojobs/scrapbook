@@ -1,7 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scrapbook/pages/image_view.page.dart';
 import 'package:typeweight/typeweight.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -9,6 +8,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:scrapbook/state/state.dart';
 import 'package:scrapbook/theme/fonts.dart';
 import 'package:scrapbook/theme/colors.dart';
+import 'package:scrapbook/pages/image_view.page.dart';
 import 'package:scrapbook/components/action_button.dart';
 
 class HomePage extends StatelessWidget {
@@ -35,13 +35,13 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: Observer(
-        builder: (_) {
-          final posts = _store.posts;
-          return RefreshIndicator(
-            onRefresh: _store.loadPosts,
-            displacement: 1,
-            child: ListView.builder(
+      body: RefreshIndicator(
+        displacement: 1,
+        onRefresh: _store.loadPosts,
+        child: Observer(
+          builder: (_) {
+            final posts = _store.posts;
+            return ListView.builder(
               itemCount: posts.length,
               itemBuilder: (_, index) {
                 final post = posts[index];
@@ -192,9 +192,9 @@ class HomePage extends StatelessWidget {
                   ),
                 );
               },
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
