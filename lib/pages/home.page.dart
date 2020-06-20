@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:scrapbook/theme/colors.dart';
 import 'package:typeweight/typeweight.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 import 'package:scrapbook/state/state.dart';
 import 'package:scrapbook/theme/fonts.dart';
+import 'package:scrapbook/theme/colors.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -89,12 +90,15 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                       SizedBox(
-                        height: NavigationToolbar.kMiddleSpacing,
+                        height: NavigationToolbar.kMiddleSpacing / 2,
                       ),
-                      Text(
-                        post.text,
-                        style: ThemedFonts.primary(
-                          fontSize: theme.textTheme.subtitle1.fontSize,
+                      MarkdownBody(
+                        data: post.text,
+                        fitContent: true,
+                        styleSheet:
+                            MarkdownStyleSheet.fromTheme(Theme.of(context))
+                                .copyWith(
+                          p: theme.textTheme.subtitle1,
                         ),
                       ),
                       SizedBox(

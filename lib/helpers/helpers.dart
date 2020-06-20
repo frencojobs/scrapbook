@@ -1,4 +1,5 @@
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:flutter_emoji/flutter_emoji.dart';
 
 String formatTimeFromJson(String time) {
   final current = DateTime.now();
@@ -8,5 +9,6 @@ String formatTimeFromJson(String time) {
 }
 
 String formatText(String text) {
-  return text;
+  final parser = EmojiParser();
+  return parser.emojify(text);
 }

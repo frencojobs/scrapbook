@@ -33,6 +33,7 @@ class _MainframeState extends State<Mainframe> {
         title: 'Scrapbook',
         theme: ThemeData(
           primaryColor: ThemedColors.primary,
+          accentColor: ThemedColors.red,
           fontFamily: ThemedFonts.primary().fontFamily,
           splashFactory: InkRipple.splashFactory,
           scaffoldBackgroundColor: Colors.white,
