@@ -34,6 +34,8 @@ class _MainframeState extends State<Mainframe> {
         theme: ThemeData(
           primaryColor: ThemedColors.primary,
           fontFamily: ThemedFonts.primary().fontFamily,
+          splashFactory: InkRipple.splashFactory,
+          scaffoldBackgroundColor: Colors.white,
         ),
         home: HomePage(),
       ),

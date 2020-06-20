@@ -36,12 +36,45 @@ class User {
 }
 
 @JsonSerializable()
+class Thumbnail {
+  final String url;
+  final int width;
+  final int height;
+
+  Thumbnail({this.url, this.width, this.height});
+
+  factory Thumbnail.fromJson(Map<String, dynamic> json) {
+    return _$ThumbnailFromJson(json);
+  }
+  Map<String, dynamic> toJson() {
+    return _$ThumbnailToJson(this);
+  }
+}
+
+@JsonSerializable()
+class Thumbnails {
+  final Thumbnail small;
+  final Thumbnail large;
+  final Thumbnail full;
+
+  Thumbnails({this.small, this.large, this.full});
+
+  factory Thumbnails.fromJson(Map<String, dynamic> json) {
+    return _$ThumbnailsFromJson(json);
+  }
+  Map<String, dynamic> toJson() {
+    return _$ThumbnailsToJson(this);
+  }
+}
+
+@JsonSerializable()
 class Attachment {
   final String id;
   final String url;
   final String filename;
   final int size;
   final String type;
+  final Thumbnails thumbnails;
 
   Attachment({
     this.id,
@@ -49,6 +82,7 @@ class Attachment {
     this.filename,
     this.size,
     this.type,
+    this.thumbnails,
   });
 
   factory Attachment.fromJson(Map<String, dynamic> json) {

@@ -32,6 +32,41 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'website': instance.website,
     };
 
+Thumbnail _$ThumbnailFromJson(Map<String, dynamic> json) {
+  return Thumbnail(
+    url: json['url'] as String,
+    width: json['width'] as int,
+    height: json['height'] as int,
+  );
+}
+
+Map<String, dynamic> _$ThumbnailToJson(Thumbnail instance) => <String, dynamic>{
+      'url': instance.url,
+      'width': instance.width,
+      'height': instance.height,
+    };
+
+Thumbnails _$ThumbnailsFromJson(Map<String, dynamic> json) {
+  return Thumbnails(
+    small: json['small'] == null
+        ? null
+        : Thumbnail.fromJson(json['small'] as Map<String, dynamic>),
+    large: json['large'] == null
+        ? null
+        : Thumbnail.fromJson(json['large'] as Map<String, dynamic>),
+    full: json['full'] == null
+        ? null
+        : Thumbnail.fromJson(json['full'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$ThumbnailsToJson(Thumbnails instance) =>
+    <String, dynamic>{
+      'small': instance.small,
+      'large': instance.large,
+      'full': instance.full,
+    };
+
 Attachment _$AttachmentFromJson(Map<String, dynamic> json) {
   return Attachment(
     id: json['id'] as String,
@@ -39,6 +74,9 @@ Attachment _$AttachmentFromJson(Map<String, dynamic> json) {
     filename: json['filename'] as String,
     size: json['size'] as int,
     type: json['type'] as String,
+    thumbnails: json['thumbnails'] == null
+        ? null
+        : Thumbnails.fromJson(json['thumbnails'] as Map<String, dynamic>),
   );
 }
 
@@ -49,6 +87,7 @@ Map<String, dynamic> _$AttachmentToJson(Attachment instance) =>
       'filename': instance.filename,
       'size': instance.size,
       'type': instance.type,
+      'thumbnails': instance.thumbnails,
     };
 
 Post _$PostFromJson(Map<String, dynamic> json) {
