@@ -28,7 +28,9 @@ class HomePage extends StatelessWidget {
         ),
         actions: <Widget>[
           ActionButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/settings');
+            },
             icon: Icon(
               Icons.settings,
             ),

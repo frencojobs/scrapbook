@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:scrapbook/pages/settings.page.dart';
 
 import 'package:scrapbook/state/state.dart';
 import 'package:scrapbook/theme/colors.dart';
@@ -38,6 +39,9 @@ class _MainframeState extends State<Mainframe> {
           splashFactory: InkRipple.splashFactory,
           scaffoldBackgroundColor: Colors.white,
         ),
+        routes: {
+          '/settings': (_) => SettingsPage(),
+        },
         home: HomePage(),
       ),
     );

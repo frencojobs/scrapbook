@@ -19,6 +19,7 @@ class ImageViewPage extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
+        titleSpacing: 0,
         leading: ActionButton(
           onPressed: () {
             Navigator.pop(context);
