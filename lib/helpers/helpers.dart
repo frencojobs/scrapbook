@@ -9,6 +9,13 @@ String formatTimeFromJson(String time) {
 }
 
 String formatText(String text) {
+  final result = text.replaceAllMapped(
+    RegExp(r'<([^|>]+)\|([^|<]+)>'),
+    (match) {
+      return '[${match.group(1)}](${match.group(2)})';
+    },
+  );
+
   final parser = EmojiParser();
-  return parser.emojify(text);
+  return parser.emojify(result);
 }
