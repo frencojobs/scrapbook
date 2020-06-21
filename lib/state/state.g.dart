@@ -9,18 +9,33 @@ part of 'state.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ScrapbookStore on _ScrapbookStore, Store {
-  final _$isLoadingAtom = Atom(name: '_ScrapbookStore.isLoading');
+  final _$isPostsLoadingAtom = Atom(name: '_ScrapbookStore.isPostsLoading');
 
   @override
-  bool get isLoading {
-    _$isLoadingAtom.reportRead();
-    return super.isLoading;
+  bool get isPostsLoading {
+    _$isPostsLoadingAtom.reportRead();
+    return super.isPostsLoading;
   }
 
   @override
-  set isLoading(bool value) {
-    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
-      super.isLoading = value;
+  set isPostsLoading(bool value) {
+    _$isPostsLoadingAtom.reportWrite(value, super.isPostsLoading, () {
+      super.isPostsLoading = value;
+    });
+  }
+
+  final _$isUsersLoadingAtom = Atom(name: '_ScrapbookStore.isUsersLoading');
+
+  @override
+  bool get isUsersLoading {
+    _$isUsersLoadingAtom.reportRead();
+    return super.isUsersLoading;
+  }
+
+  @override
+  set isUsersLoading(bool value) {
+    _$isUsersLoadingAtom.reportWrite(value, super.isUsersLoading, () {
+      super.isUsersLoading = value;
     });
   }
 
@@ -39,6 +54,21 @@ mixin _$ScrapbookStore on _ScrapbookStore, Store {
     });
   }
 
+  final _$usersAtom = Atom(name: '_ScrapbookStore.users');
+
+  @override
+  ObservableList<User> get users {
+    _$usersAtom.reportRead();
+    return super.users;
+  }
+
+  @override
+  set users(ObservableList<User> value) {
+    _$usersAtom.reportWrite(value, super.users, () {
+      super.users = value;
+    });
+  }
+
   final _$loadPostsAsyncAction = AsyncAction('_ScrapbookStore.loadPosts');
 
   @override
@@ -46,11 +76,34 @@ mixin _$ScrapbookStore on _ScrapbookStore, Store {
     return _$loadPostsAsyncAction.run(() => super.loadPosts());
   }
 
+  final _$refreshPostsAsyncAction = AsyncAction('_ScrapbookStore.refreshPosts');
+
+  @override
+  Future<void> refreshPosts() {
+    return _$refreshPostsAsyncAction.run(() => super.refreshPosts());
+  }
+
+  final _$loadUsersAsyncAction = AsyncAction('_ScrapbookStore.loadUsers');
+
+  @override
+  Future<void> loadUsers() {
+    return _$loadUsersAsyncAction.run(() => super.loadUsers());
+  }
+
+  final _$refreshUsersAsyncAction = AsyncAction('_ScrapbookStore.refreshUsers');
+
+  @override
+  Future<void> refreshUsers() {
+    return _$refreshUsersAsyncAction.run(() => super.refreshUsers());
+  }
+
   @override
   String toString() {
     return '''
-isLoading: ${isLoading},
-posts: ${posts}
+isPostsLoading: ${isPostsLoading},
+isUsersLoading: ${isUsersLoading},
+posts: ${posts},
+users: ${users}
     ''';
   }
 }
