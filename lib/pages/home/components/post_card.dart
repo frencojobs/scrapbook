@@ -12,11 +12,13 @@ import 'package:scrapbook/pages/image_view.page.dart';
 
 class PostCardComponent extends StatefulWidget {
   final Post post;
+  final User user;
   final int index;
 
   const PostCardComponent({
     Key key,
     @required this.post,
+    @required this.user,
     @required this.index,
   }) : super(key: key);
 
@@ -71,7 +73,7 @@ class _PostCardComponentState extends State<PostCardComponent>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             AvatarWidget(
-              user: widget.post.user,
+              user: widget.user,
               postedAt: widget.post.postedAt,
             ),
             SizedBox(
@@ -148,7 +150,9 @@ class AvatarWidget extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (_) {
-              return ProfilePage();
+              return ProfilePage(
+                username: user.username,
+              );
             },
           ),
         );

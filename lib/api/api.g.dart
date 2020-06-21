@@ -60,7 +60,8 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final Response _result = await _dio.request('/users/$username',
+    final Response<Map<String, dynamic>> _result = await _dio.request(
+        '/users/$username',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'GET',
@@ -68,7 +69,7 @@ class _RestClient implements RestClient {
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
-    final value = _result.data;
+    final value = UserInfo.fromJson(_result.data);
     return value;
   }
 }

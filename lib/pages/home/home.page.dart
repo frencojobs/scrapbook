@@ -73,11 +73,19 @@ class _HomePageState extends State<HomePage>
               controller: _tabController,
               onTap: (i) {
                 if (!_tabController.indexIsChanging) {
-                  _postsScrollController.animateTo(
-                    0,
-                    duration: kThemeChangeDuration,
-                    curve: Curves.easeIn,
-                  );
+                  if (i == 0) {
+                    _postsScrollController.animateTo(
+                      0,
+                      duration: kThemeChangeDuration,
+                      curve: Curves.easeIn,
+                    );
+                  } else {
+                    _usersScrollController.animateTo(
+                      0,
+                      duration: kThemeChangeDuration,
+                      curve: Curves.easeIn,
+                    );
+                  }
                 }
               },
               tabs: [
@@ -107,7 +115,7 @@ class _HomePageState extends State<HomePage>
                 builder: (_) {
                   final posts = _store.posts;
                   return RefreshIndicator(
-                    onRefresh: _store.loadPosts,
+                    onRefresh: _store.refreshPosts,
                     child: PostsListView(
                       controller: _postsScrollController,
                       posts: posts.toList(),
@@ -119,7 +127,7 @@ class _HomePageState extends State<HomePage>
                 final users = _store.users;
 
                 return RefreshIndicator(
-                  onRefresh: _store.loadPosts,
+                  onRefresh: _store.refreshUsers,
                   child: UsersListView(
                     controller: _usersScrollController,
                     users: users.toList(),

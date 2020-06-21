@@ -32,6 +32,7 @@ class _PostsListViewState extends State<PostsListView>
 
         return PostCardComponent(
           post: post,
+          user: post.user,
           index: index,
         );
       },

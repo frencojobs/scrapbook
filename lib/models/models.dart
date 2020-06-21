@@ -121,3 +121,21 @@ class Post {
     return _$PostToJson(this);
   }
 }
+
+@JsonSerializable()
+class UserInfo {
+  final User profile;
+  final List<Post> posts;
+
+  UserInfo({
+    this.profile,
+    this.posts,
+  });
+
+  factory UserInfo.fromJson(Map<String, dynamic> json) {
+    return _$UserInfoFromJson(json);
+  }
+  Map<String, dynamic> toJson() {
+    return _$UserInfoToJson(this);
+  }
+}

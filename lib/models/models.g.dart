@@ -112,3 +112,20 @@ Map<String, dynamic> _$PostToJson(Post instance) => <String, dynamic>{
       'text': instance.text,
       'attachments': instance.attachments,
     };
+
+UserInfo _$UserInfoFromJson(Map<String, dynamic> json) {
+  return UserInfo(
+    profile: json['profile'] == null
+        ? null
+        : User.fromJson(json['profile'] as Map<String, dynamic>),
+    posts: (json['posts'] as List)
+        ?.map(
+            (e) => e == null ? null : Post.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$UserInfoToJson(UserInfo instance) => <String, dynamic>{
+      'profile': instance.profile,
+      'posts': instance.posts,
+    };
