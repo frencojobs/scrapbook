@@ -1,13 +1,13 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-import 'package:scrapbook/helpers/helpers.dart';
-import 'package:scrapbook/pages/profile.page.dart';
 import 'package:typeweight/typeweight.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
 import 'package:scrapbook/theme/fonts.dart';
 import 'package:scrapbook/theme/colors.dart';
 import 'package:scrapbook/models/models.dart';
+import 'package:scrapbook/helpers/helpers.dart';
+import 'package:scrapbook/pages/profile.page.dart';
 import 'package:scrapbook/pages/image_view.page.dart';
 
 class PostsListView extends StatefulWidget {
@@ -93,28 +93,43 @@ class _PostsListViewState extends State<PostsListView>
                     children: <Widget>[
                       Badge(
                         showBadge: post.user.streakDisplay,
-                        elevation: 1.0,
-                        position: BadgePosition.bottomRight(right: -3),
-                        badgeColor: ThemedColors.yellow,
+                        elevation: 0.0,
+                        position: BadgePosition.bottomRight(right: 2),
+                        badgeColor: ThemedColors.red,
                         badgeContent: Text(
                           '${post.user.streakCount}',
                           style: ThemedFonts.primary(
                             fontWeight: TypeWeight.medium,
+                            color: Colors.white,
                           ),
                         ),
                         child: Container(
+                          padding:
+                              EdgeInsets.all(post.user.streakDisplay ? 2 : 0),
                           clipBehavior: Clip.antiAlias,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(40),
-                          ),
-                          height: 40,
-                          width: 40,
-                          child: FadeInImage(
-                            placeholder: AssetImage(
-                              'assets/placeholder.png',
+                            border: Border.all(
+                              color: post.user.streakDisplay
+                                  ? ThemedColors.red
+                                  : Colors.transparent,
+                              width: 2,
                             ),
-                            image: NetworkImage(
-                              post.user.avatar,
+                          ),
+                          child: Container(
+                            clipBehavior: Clip.antiAlias,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(40),
+                            ),
+                            height: 40,
+                            width: 40,
+                            child: FadeInImage(
+                              placeholder: AssetImage(
+                                'assets/placeholder.png',
+                              ),
+                              image: NetworkImage(
+                                post.user.avatar,
+                              ),
                             ),
                           ),
                         ),
