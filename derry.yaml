@@ -1,2 +1,4 @@
 build: flutter pub run build_runner build
 watch: flutter pub run build_runner watch
+generate-icon: flutter pub run flutter_launcher_icons:main
+release: flutter build apk

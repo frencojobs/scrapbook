@@ -21,5 +21,5 @@ abstract class RestClient {
   Future<List<User>> fetchUsers();
 
   @GET('/users/{username}')
-  Future<dynamic> fetchUserByName(@Path('username') String username);
+  Future<UserInfo> fetchUserByName(@Path('username') String username);
 }
