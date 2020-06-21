@@ -24,12 +24,17 @@ abstract class _ScrapbookStore with Store {
   @action
   Future<void> loadPosts() async {
     isPostsLoading = true;
-    final res = await Api.client.fetchPosts();
-    if (!listEquals(res, posts)) {
-      posts
-        ..clear()
-        ..addAll(res);
+    try {
+      final res = await Api.client.fetchPosts();
+      if (!listEquals(res, posts)) {
+        posts
+          ..clear()
+          ..addAll(res);
+      }
+    } catch (e) {
+      print(e);
     }
+
     isPostsLoading = false;
   }
 
@@ -46,11 +51,15 @@ abstract class _ScrapbookStore with Store {
   @action
   Future<void> loadUsers() async {
     isUsersLoading = true;
-    final res = await Api.client.fetchUsers();
-    if (!listEquals(res, posts)) {
-      users
-        ..clear()
-        ..addAll(res);
+    try {
+      final res = await Api.client.fetchUsers();
+      if (!listEquals(res, posts)) {
+        users
+          ..clear()
+          ..addAll(res);
+      }
+    } catch (e) {
+      print(e);
     }
     isUsersLoading = false;
   }

@@ -47,6 +47,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     final _store = Provider.of<ScrapbookStore>(context);
+    final theme = Theme.of(context);
 
     return Stack(
       children: <Widget>[
@@ -114,26 +115,95 @@ class _HomePageState extends State<HomePage>
               Observer(
                 builder: (_) {
                   final posts = _store.posts;
-                  return RefreshIndicator(
-                    onRefresh: _store.refreshPosts,
-                    child: PostsListView(
-                      controller: _postsScrollController,
-                      posts: posts.toList(),
-                    ),
-                  );
+
+                  if (posts.isEmpty) {
+                    if (_store.isPostsLoading) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else {
+                      return InkWell(
+                        onTap: () async {
+                          await _store.loadPosts();
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/sad-ginger-cat.png',
+                              width: MediaQuery.of(context).size.width / 1.5,
+                            ),
+                            Text(
+                              'Could not fetch the data. Tap to reload.',
+                              style: ThemedFonts.primary(
+                                fontWeight: FontWeight.bold,
+                                fontSize: theme.textTheme.subtitle2.fontSize,
+                                color: Colors.grey[600],
+                              ),
+                            ),
+                            SizedBox(height: kToolbarHeight),
+                          ],
+                        ),
+                      );
+                    }
+                  } else {
+                    return RefreshIndicator(
+                      onRefresh: _store.refreshPosts,
+                      child: PostsListView(
+                        controller: _postsScrollController,
+                        posts: posts.toList(),
+                      ),
+                    );
+                  }
                 },
               ),
-              Observer(builder: (_) {
-                final users = _store.users;
+              Observer(
+                builder: (_) {
+                  final users = _store.users;
 
-                return RefreshIndicator(
-                  onRefresh: _store.refreshUsers,
-                  child: UsersListView(
-                    controller: _usersScrollController,
-                    users: users.toList(),
-                  ),
-                );
-              }),
+                  if (users.isEmpty) {
+                    if (_store.isUsersLoading) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else {
+                      return InkWell(
+                        onTap: () async {
+                          await _store.loadUsers();
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/sad-ginger-cat.png',
+                              width: MediaQuery.of(context).size.width / 1.5,
+                            ),
+                            Text(
+                              'Could not fetch the users. Tap to reload.',
+                              style: ThemedFonts.primary(
+                                fontWeight: FontWeight.bold,
+                                fontSize: theme.textTheme.subtitle2.fontSize,
+                                color: Colors.grey[600],
+                              ),
+                            ),
+                            SizedBox(height: kToolbarHeight),
+                          ],
+                        ),
+                      );
+                    }
+                  } else {
+                    return RefreshIndicator(
+                      onRefresh: _store.refreshUsers,
+                      child: UsersListView(
+                        controller: _usersScrollController,
+                        users: users.toList(),
+                      ),
+                    );
+                  }
+                },
+              ),
             ],
           ),
         ),

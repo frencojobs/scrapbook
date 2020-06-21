@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:scrapbook/pages/home/components/post_card.dart';
 import 'package:typeweight/typeweight.dart';
 import 'package:flutter_icons/flutter_icons.dart' show AntDesign;
 
@@ -8,9 +7,10 @@ import 'package:scrapbook/theme/fonts.dart';
 import 'package:scrapbook/theme/colors.dart';
 import 'package:scrapbook/models/models.dart';
 import 'package:scrapbook/helpers/helpers.dart';
+import 'package:scrapbook/components/post_card.dart';
 import 'package:scrapbook/components/action_button.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   final String username;
 
   const ProfilePage({
@@ -19,9 +19,14 @@ class ProfilePage extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final future = Api.client.fetchUserByName(username);
+    final future = Api.client.fetchUserByName(widget.username);
 
     return Scaffold(
       appBar: AppBar(
@@ -44,6 +49,35 @@ class ProfilePage extends StatelessWidget {
       body: FutureBuilder<UserInfo>(
         future: future,
         builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return InkWell(
+              onTap: () {
+                setState(() {});
+              },
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Image.asset(
+                      'assets/sad-ginger-cat.png',
+                      width: MediaQuery.of(context).size.width / 1.5,
+                    ),
+                    Text(
+                      'Could not fetch the users. Tap to reload.',
+                      style: ThemedFonts.primary(
+                        fontWeight: FontWeight.bold,
+                        fontSize: theme.textTheme.subtitle2.fontSize,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                    SizedBox(height: kToolbarHeight),
+                  ],
+                ),
+              ),
+            );
+          }
+
           if (snapshot.hasData) {
             final user = snapshot.data;
             return SingleChildScrollView(
@@ -111,13 +145,19 @@ class ProfilePage extends StatelessWidget {
                                 onTap: () {
                                   launchURL(context, user.profile.website);
                                 },
-                                child: Text(
-                                  '${user.profile.website}',
-                                  style: ThemedFonts.primary(
-                                    fontSize:
-                                        theme.textTheme.subtitle2.fontSize,
-                                    fontWeight: TypeWeight.medium,
-                                    color: Colors.blueAccent,
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width -
+                                      (4 * NavigationToolbar.kMiddleSpacing) -
+                                      80,
+                                  child: Text(
+                                    '${user.profile.website}',
+                                    style: ThemedFonts.primary(
+                                      fontSize:
+                                          theme.textTheme.subtitle2.fontSize,
+                                      fontWeight: TypeWeight.medium,
+                                      color: Colors.blueAccent,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
                               ),

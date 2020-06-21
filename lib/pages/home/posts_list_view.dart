@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:scrapbook/models/models.dart';
-import 'components/post_card.dart';
+import 'package:scrapbook/components/post_card.dart';
 
 class PostsListView extends StatefulWidget {
   final List<Post> posts;

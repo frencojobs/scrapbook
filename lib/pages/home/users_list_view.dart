@@ -40,7 +40,9 @@ class _UsersListViewState extends State<UsersListView>
               context,
               MaterialPageRoute(
                 builder: (_) {
-                  return ProfilePage();
+                  return ProfilePage(
+                    username: user.username,
+                  );
                 },
               ),
             );
