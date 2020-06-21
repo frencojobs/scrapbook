@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:scrapbook/helpers/helpers.dart';
 import 'package:scrapbook/pages/profile.page.dart';
 import 'package:typeweight/typeweight.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -150,6 +151,9 @@ class _PostsListViewState extends State<PostsListView>
                 MarkdownBody(
                   data: post.text,
                   fitContent: true,
+                  onTapLink: (link) {
+                    launchURL(context, link);
+                  },
                   styleSheet: MarkdownStyleSheet.fromTheme(theme)
                       .copyWith(p: theme.textTheme.subtitle1),
                 ),
