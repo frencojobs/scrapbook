@@ -5,8 +5,10 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'package:scrapbook/state/state.dart';
 import 'package:scrapbook/theme/fonts.dart';
-import 'package:scrapbook/pages/home/posts_list_view.dart';
 import 'package:scrapbook/components/action_button.dart';
+
+import 'posts_list_view.dart';
+import 'users_list_view.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -116,7 +118,13 @@ class _HomePageState extends State<HomePage>
               Observer(builder: (_) {
                 final users = _store.users;
 
-                return Text('Users');
+                return RefreshIndicator(
+                  onRefresh: _store.loadPosts,
+                  child: UsersListView(
+                    controller: _usersScrollController,
+                    users: users.toList(),
+                  ),
+                );
               }),
             ],
           ),
