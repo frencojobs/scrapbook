@@ -52,7 +52,7 @@ class _UsersListViewState extends State<UsersListView>
               border: Border(
                 bottom: BorderSide(
                   width: 1,
-                  color: Colors.grey[300],
+                  color: theme.dividerColor,
                 ),
               ),
             ),

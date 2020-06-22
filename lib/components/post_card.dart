@@ -61,7 +61,7 @@ class _PostCardComponentState extends State<PostCardComponent>
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
-              color: Colors.grey[300],
+              color: theme.dividerColor,
               width: 1,
             ),
           ),
@@ -98,7 +98,7 @@ class _PostCardComponentState extends State<PostCardComponent>
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey[300],
+                      color: theme.dividerColor,
                     ),
                     padding: const EdgeInsets.all(1),
                     child: Hero(
@@ -215,12 +215,13 @@ class AvatarWidget extends StatelessWidget {
                 style: ThemedFonts.primary(
                   fontWeight: TypeWeight.medium,
                   fontSize: theme.textTheme.subtitle1.fontSize,
+                  color: theme.textTheme.subtitle1.color,
                 ),
               ),
               Text(
                 postedAt,
                 style: ThemedFonts.primary(
-                  color: ThemedColors.textGrey,
+                  color: theme.hintColor,
                   fontSize: theme.textTheme.subtitle2.fontSize,
                 ),
               ),
