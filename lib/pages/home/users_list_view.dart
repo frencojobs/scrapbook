@@ -91,7 +91,7 @@ class _UsersListViewState extends State<UsersListView>
                         fontSize: theme.textTheme.subtitle1.fontSize,
                       ),
                     ),
-                    if (user.streakDisplay)
+                    if (user.streakDisplay != null && user.streakDisplay)
                       Text(
                         '${user.streakCount} days streak',
                         style: ThemedFonts.primary(

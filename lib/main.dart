@@ -4,8 +4,6 @@ import 'package:scrapbook/theme/theme.dart';
 import 'package:theme_provider/theme_provider.dart';
 
 import 'package:scrapbook/state/state.dart';
-import 'package:scrapbook/theme/colors.dart';
-import 'package:scrapbook/theme/fonts.dart';
 import 'package:scrapbook/pages/settings.page.dart';
 import 'package:scrapbook/pages/home/home.page.dart';
 

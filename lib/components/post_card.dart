@@ -162,7 +162,7 @@ class AvatarWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Badge(
-            showBadge: user.streakDisplay,
+            showBadge: user.streakDisplay != null && user.streakDisplay,
             elevation: 0.0,
             position: BadgePosition.bottomRight(right: 2),
             badgeColor: ThemedColors.red,
@@ -174,12 +174,14 @@ class AvatarWidget extends StatelessWidget {
               ),
             ),
             child: Container(
-              padding: EdgeInsets.all(user.streakDisplay ? 2 : 0),
+              padding: EdgeInsets.all(
+                user.streakDisplay != null && user.streakDisplay ? 2 : 0,
+              ),
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(40),
                 border: Border.all(
-                  color: user.streakDisplay
+                  color: user.streakDisplay != null && user.streakDisplay
                       ? ThemedColors.red
                       : Colors.transparent,
                   width: 2,

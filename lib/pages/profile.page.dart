@@ -128,7 +128,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 color: theme.textTheme.subtitle1.color,
                               ),
                             ),
-                            if (user.profile.streakDisplay)
+                            if (user.profile.streakDisplay != null &&
+                                user.profile.streakDisplay)
                               Text(
                                 '${user.profile.streakCount} ${user.profile.streakCount > 1 ? 'days' : 'day'} streak',
                                 style: ThemedFonts.primary(

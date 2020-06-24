@@ -3,9 +3,14 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 
+String _ignoreSubMicro(String s) {
+  if (s.length > 27) return s.substring(0, 26) + s[s.length - 1];
+  return s;
+}
+
 String formatTimeFromJson(String time) {
   final current = DateTime.now();
-  final happened = DateTime.parse(time);
+  final happened = DateTime.parse(_ignoreSubMicro(time));
   final difference = current.difference(happened);
   return timeago.format(current.subtract(difference));
 }
