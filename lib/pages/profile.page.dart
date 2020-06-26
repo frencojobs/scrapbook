@@ -4,7 +4,6 @@ import 'package:flutter_icons/flutter_icons.dart' show AntDesign;
 
 import 'package:scrapbook/api/api.dart';
 import 'package:scrapbook/theme/fonts.dart';
-import 'package:scrapbook/theme/colors.dart';
 import 'package:scrapbook/models/models.dart';
 import 'package:scrapbook/helpers/helpers.dart';
 import 'package:scrapbook/components/post_card.dart';

@@ -35,10 +35,11 @@ class ImageViewPage extends StatelessWidget {
         ),
       ),
       body: PhotoView(
+        minScale: PhotoViewComputedScale.contained,
+        heroAttributes: PhotoViewHeroAttributes(tag: '$photo-$id'),
         backgroundDecoration: BoxDecoration(
           color: theme.scaffoldBackgroundColor,
         ),
-        heroAttributes: PhotoViewHeroAttributes(tag: '$photo-$id'),
         imageProvider: NetworkImage(photo),
       ),
     );
