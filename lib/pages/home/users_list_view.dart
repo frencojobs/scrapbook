@@ -52,7 +52,7 @@ class _UsersListViewState extends State<UsersListView>
               border: Border(
                 bottom: BorderSide(
                   width: 1,
-                  color: Colors.grey[300],
+                  color: theme.dividerColor,
                 ),
               ),
             ),
@@ -91,7 +91,7 @@ class _UsersListViewState extends State<UsersListView>
                         fontSize: theme.textTheme.subtitle1.fontSize,
                       ),
                     ),
-                    if (user.streakDisplay)
+                    if (user.streakDisplay != null && user.streakDisplay)
                       Text(
                         '${user.streakCount} days streak',
                         style: ThemedFonts.primary(

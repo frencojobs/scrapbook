@@ -61,7 +61,7 @@ class _PostCardComponentState extends State<PostCardComponent>
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
-              color: Colors.grey[300],
+              color: theme.dividerColor,
               width: 1,
             ),
           ),
@@ -98,7 +98,7 @@ class _PostCardComponentState extends State<PostCardComponent>
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey[300],
+                      color: theme.dividerColor,
                     ),
                     padding: const EdgeInsets.all(1),
                     child: Hero(
@@ -162,7 +162,7 @@ class AvatarWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Badge(
-            showBadge: user.streakDisplay,
+            showBadge: user.streakDisplay != null && user.streakDisplay,
             elevation: 0.0,
             position: BadgePosition.bottomRight(right: 2),
             badgeColor: ThemedColors.red,
@@ -174,12 +174,14 @@ class AvatarWidget extends StatelessWidget {
               ),
             ),
             child: Container(
-              padding: EdgeInsets.all(user.streakDisplay ? 2 : 0),
+              padding: EdgeInsets.all(
+                user.streakDisplay != null && user.streakDisplay ? 2 : 0,
+              ),
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(40),
                 border: Border.all(
-                  color: user.streakDisplay
+                  color: user.streakDisplay != null && user.streakDisplay
                       ? ThemedColors.red
                       : Colors.transparent,
                   width: 2,
@@ -215,12 +217,13 @@ class AvatarWidget extends StatelessWidget {
                 style: ThemedFonts.primary(
                   fontWeight: TypeWeight.medium,
                   fontSize: theme.textTheme.subtitle1.fontSize,
+                  color: theme.textTheme.subtitle1.color,
                 ),
               ),
               Text(
                 postedAt,
                 style: ThemedFonts.primary(
-                  color: ThemedColors.textGrey,
+                  color: theme.hintColor,
                   fontSize: theme.textTheme.subtitle2.fontSize,
                 ),
               ),

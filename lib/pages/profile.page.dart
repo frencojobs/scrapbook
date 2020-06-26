@@ -4,7 +4,6 @@ import 'package:flutter_icons/flutter_icons.dart' show AntDesign;
 
 import 'package:scrapbook/api/api.dart';
 import 'package:scrapbook/theme/fonts.dart';
-import 'package:scrapbook/theme/colors.dart';
 import 'package:scrapbook/models/models.dart';
 import 'package:scrapbook/helpers/helpers.dart';
 import 'package:scrapbook/components/post_card.dart';
@@ -93,7 +92,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           clipBehavior: Clip.antiAlias,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Colors.grey[300],
+                            color: theme.dividerColor,
                           ),
                           padding: const EdgeInsets.all(1),
                           child: Container(
@@ -125,16 +124,17 @@ class _ProfilePageState extends State<ProfilePage> {
                               style: ThemedFonts.primary(
                                 fontSize: theme.textTheme.headline6.fontSize,
                                 fontWeight: TypeWeight.bold,
-                                color: ThemedColors.textBlack,
+                                color: theme.textTheme.subtitle1.color,
                               ),
                             ),
-                            if (user.profile.streakDisplay)
+                            if (user.profile.streakDisplay != null &&
+                                user.profile.streakDisplay)
                               Text(
                                 '${user.profile.streakCount} ${user.profile.streakCount > 1 ? 'days' : 'day'} streak',
                                 style: ThemedFonts.primary(
                                   fontSize: theme.textTheme.subtitle2.fontSize,
                                   fontWeight: TypeWeight.medium,
-                                  color: ThemedColors.textGrey,
+                                  color: theme.hintColor,
                                 ),
                               ),
                             SizedBox(
@@ -226,7 +226,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Container(
                     height: 1,
-                    color: Colors.grey[300],
+                    color: theme.dividerColor,
                   ),
                   ...user.posts.asMap().entries.map((entry) {
                     final index = entry.key;
